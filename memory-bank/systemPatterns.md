@@ -2,15 +2,17 @@
 
 ## Архитектура системы
 
-**Web-приложение с разделением на фронтенд и бэкенд:**
+**Монорепо на pnpm workspaces. Единое Next.js-приложение:**
 
-- **Фронтенд:** Next.js (React, TypeScript, TailwindCSS) — SPA/SSR.
-- **Бэкенд:** Node.js REST API.
+- **Фронтенд:** Next.js (React, TypeScript, TailwindCSS) — App Router, SSR/RSC.
+- **Бэкенд:** Next.js API Routes (App Router) — отдельного Node.js-сервиса нет.
+- **ORM:** Prisma — единственный способ работы с БД.
 - **База данных:** PostgreSQL.
 - **Автоматизации:** N8N — оркестратор интеграций и бизнес-логики.
 - **Интеграция:** Avito API (webhooks + polling).
 - **Уведомления:** Telegram Bot API.
 - **Инфраструктура:** Docker.
+- **Монорепо:** pnpm workspaces.
 
 ## Ключевые доменные сущности
 

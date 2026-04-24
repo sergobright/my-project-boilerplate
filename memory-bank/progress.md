@@ -2,11 +2,18 @@
 
 ## Что уже сделано
 
-- [x] Описан и детально задокументирован `projectbrief.md` (продукт, функционал, ограничения, критерии успеха).
-- [x] Заполнен `productContext.md` на основе brief.
-- [x] Заполнен `systemPatterns.md`: архитектура, сущности, воронка, паттерны.
-- [x] Заполнен `techContext.md`: стек, интеграции, переменные окружения.
+- [x] Описан и детально задокументирован `projectbrief.md`.
+- [x] Заполнен `productContext.md`, `systemPatterns.md`, `techContext.md`.
 - [x] Настроен Memory Bank.
+- [x] Инициализировано монорепо (pnpm workspaces).
+- [x] Создан `.devcontainer/` — разработка полностью в Docker (DevContainer).
+- [x] Создан `docker-compose.yml` (production) и `.devcontainer/docker-compose.dev.yml`.
+- [x] Написана схема БД `prisma/schema.prisma` (все сущности MVP).
+- [x] Создан `prisma/seed.ts` — 10 статусов воронки + переходы.
+- [x] Создана структура `src/app/` со всеми разделами.
+- [x] Создан `src/lib/db.ts` — Prisma singleton.
+- [x] Создан `src/app/api/webhooks/n8n/route.ts` — точка входа от N8N.
+- [x] Production `Dockerfile` для `apps/web`.
 
 ## Что осталось сделать
 

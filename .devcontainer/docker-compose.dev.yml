@@ -1,0 +1,74 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile.dev
+    volumes:
+      - ..:/workspace:cached
+      - /workspace/node_modules
+      - /workspace/apps/web/node_modules
+      - /workspace/apps/web/.next
+    command: sleep infinity
+    environment:
+      DATABASE_URL: postgresql://hexacash:hexacash@postgres:5432/hexacash
+      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_SECRET: dev-secret-change-in-production
+      N8N_WEBHOOK_BASE_URL: http://n8n:5678
+      N8N_WEBHOOK_SECRET: dev-n8n-secret
+    ports:
+      - "3000:3000"
+    networks:
+      - hexacash
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: hexacash
+      POSTGRES_PASSWORD: hexacash
+      POSTGRES_DB: hexacash
+    volumes:
+      - postgres-dev-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - hexacash
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hexacash -d hexacash"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+    environment:
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: n8n
+      DB_POSTGRESDB_USER: hexacash
+      DB_POSTGRESDB_PASSWORD: hexacash
+      N8N_BASIC_AUTH_ACTIVE: "true"
+      N8N_BASIC_AUTH_USER: admin
+      N8N_BASIC_AUTH_PASSWORD: admin
+      WEBHOOK_URL: http://localhost:5678
+    volumes:
+      - n8n-dev-data:/home/node/.n8n
+    ports:
+      - "5678:5678"
+    networks:
+      - hexacash
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+networks:
+  hexacash:
+
+volumes:
+  postgres-dev-data:
+  n8n-dev-data:

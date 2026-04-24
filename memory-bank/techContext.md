@@ -5,18 +5,19 @@
 | Слой | Технология |
 |---|---|
 | Фронтенд | Next.js, React, TypeScript, TailwindCSS |
-| Бэкенд | Node.js (REST API) |
+| Бэкенд | Next.js API Routes (App Router) |
+| ORM | Prisma |
 | База данных | PostgreSQL |
 | Автоматизации | N8N (self-hosted в Docker) |
 | Уведомления | Telegram Bot API |
 | Интеграция | Avito API (https://developers.avito.ru/api-catalog) |
 | Инфраструктура | Docker + Docker Compose |
-| Репозиторий | **Монорепо** (фронтенд + бэкенд в одном репо) |
+| Репозиторий | **Монорепо** (pnpm workspaces) |
 
 ## Требования для разработки
 
 - Node.js (latest LTS)
-- pnpm (пакетный менеджер)
+- pnpm (пакетный менеджер, монорепо через pnpm workspaces)
 - Docker + Docker Compose
 - PostgreSQL (локально или в контейнере)
 - N8N (self-hosted в Docker)
@@ -66,3 +67,5 @@ NEXTAUTH_SECRET=...
 - Avito — единственный канал в MVP. Архитектурно поддерживаются дополнительные каналы.
 - Переход в «Сделка оформлена» — только по данным из Avito, не по решению AI.
 - Статусы должны быть реализованы расширяемо (не хардкодить нерасширяемую логику).
+- Бэкенд реализуется через Next.js API Routes (App Router) — отдельного Node.js-сервиса нет.
+- Prisma используется как единственный способ работы с БД (не raw SQL в приложении).

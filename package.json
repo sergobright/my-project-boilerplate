@@ -1,0 +1,13 @@
+{
+  "name": "hexacash",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "lint": "pnpm --filter web lint",
+    "db:generate": "pnpm --filter web prisma:generate",
+    "db:migrate": "pnpm --filter web prisma:migrate",
+    "db:seed": "pnpm --filter web prisma:seed",
+    "db:studio": "pnpm --filter web prisma:studio"
+  }
+}
