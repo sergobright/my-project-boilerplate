@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: .devcontainer/Dockerfile.dev
+    restart: unless-stopped
     volumes:
       - .:/workspace:cached
       - app_node_modules:/workspace/node_modules
